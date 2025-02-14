@@ -13,7 +13,7 @@ function Login() {
     password: ""
   });
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false); // Loading state for submit button
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
@@ -28,18 +28,17 @@ function Login() {
       });
 
       if (res.data.success) {
-        toast.success(res.data.message); // Show success message
+        toast.success(res.data.message); 
         dispatch(setAuthUser(res.data))
-        navigate("/"); // Navigate to the dashboard
+        navigate("/"); /
       }
     } catch (error) {
-      console.error("Login error:", error); // Log full error for debugging
+      console.error("Login error:", error); 
       toast.error(error.response?.data?.message || "An error occurred"); // Show error message
     } finally {
-      setLoading(false); // Reset loading state regardless of success or error
+      setLoading(false); // Reset loading s
     }
-
-    // Reset form fields after submission
+    //reset form
     setUser({
       username: "",
       password: ""
