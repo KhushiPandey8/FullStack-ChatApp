@@ -51,7 +51,7 @@ export const getMessage = async (req, res) => {
         }).populate({
             path: 'messages',
             match: {
-                deletedBy: { $ne: senderId }  // Exclude messages deleted by the logged-in user
+                deletedBy: { $ne: senderId }  
             }
         });
 
@@ -74,18 +74,13 @@ export const deleteMessage = async (req, res) => {
         if (!message) {
             return res.status(404).json({ success: false, message: "Message not found" });
         }
-
-        // Check if the user is either the sender or receiver
         if (message.senderId.toString() !== userId && message.receiverId.toString() !== userId) {
             return res.status(403).json({ success: false, message: "You cannot delete this message" });
         }
-
-        // Add the user to the deletedBy list (if not already there)
         if (!message.deletedBy.includes(userId)) {
             message.deletedBy.push(userId);
         }
-
-        await message.save(); // Save the updated message with deletedBy field
+        await message.save(); 
 
         return res.status(200).json({ success: true, message: "Message deleted for you" });
     } catch (error) {
