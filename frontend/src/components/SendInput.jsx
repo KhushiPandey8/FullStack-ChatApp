@@ -4,16 +4,16 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constant.js";
 import { setMessages } from "../redux/messageSlice.js";
 import { IoSend } from "react-icons/io5";
-import Picker from 'emoji-picker-react'; // Correct import
+import Picker from 'emoji-picker-react'; 
 
 function SendInput() {
-  const [message, setMessage] = useState(""); // Input message
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false); // Control emoji picker visibility
+  const [message, setMessage] = useState(""); 
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false); 
   const dispatch = useDispatch();
-  const { selectedUser } = useSelector(store => store.user); // User to whom the message is sent
-  const { messages } = useSelector(store => store.message); // Existing messages
+  const { selectedUser } = useSelector(store => store.user); 
+  const { messages } = useSelector(store => store.message);
 
-  // Handle emoji selection
+  
   const onEmojiClick = (emojiData) => {
     setMessage(message + emojiData.emoji); // Append selected emoji to the input field
   };
